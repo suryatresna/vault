@@ -1,0 +1,44 @@
+<% content_for :title do %>
+	Edit Role
+<% end %>
+
+<% content_for :titleTag do %>
+	The role of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-body">
+	      <h1>Role#show [<%= @role.label %>]</h1>
+		  <div class="row">
+				<div class="col-md-8">
+					<fieldset>
+				  	<legend>Role Information</legend>
+				  	<div class="form-group">
+				  		<label for="name">Name</label>
+				  		<p class="form-control" disabled><%= @role.name %></p>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="label">Label</label>
+				  		<p class="form-control" disabled><%= @role.label %></p>
+				  	</div>
+				</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset>
+						<legend>Action</legend>
+						<div class="form-group">
+							<%= link_to "Edit", {controller: "role", action: "edit", id: @role.id}, class: "btn btn-primary" %>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

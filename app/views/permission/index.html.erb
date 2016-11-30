@@ -1,0 +1,57 @@
+<% content_for :title do %>
+	Permission
+<% end %>
+
+<% content_for :titleTag do %>
+	The permission of user
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-heading border-light">
+			<h4 class="panel-title">Permission</h4>
+			<ul class="panel-heading-tabs border-light">
+				<li>
+					<%= link_to "Add New", {controller: "permission", action: "new"}, class: "btn btn-info" %>
+				</li>
+			</ul>
+		</div>
+	    <div class="panel-body">
+		  <table class="table table-bordered">
+		  	<thead>
+		  		<th width="5%">ID</th>
+		  		<th width="25%">Name</th>
+		  		<th width="20%">Label</th>
+		  		<th width="40%">Action</th>
+		  	</thead>
+		  	<tbody>
+		  	<% if @permissions.count > 0 %>
+		  	<% @permissions.each do |permission| %>
+		  		<tr>
+		  			<td><input type="checkbox" name="permission[]" value="<%= permission.id %>"></td>
+		  			<td><%= permission.name %></td>
+		  			<td><%= permission.label %></td>
+		  			<td>
+		  				<div class="btn-group">
+		  					<%= link_to "Edit", {controller: "permission", action: "edit", id: permission.id},class: "btn" %>
+		  					<%= link_to "Delete", {controller: "permission", action: "destroy", id: permission.id}, method: :delete, data: {confirm: 'Are you sure ?'} ,class: "btn" %>
+		  				</div>
+		  			</td>
+		  		</tr>
+		  	<% end %>
+		  	<% else %>
+				<tr>
+					<td colspan="100%">No Records</td>
+				</tr>
+		  	<% end %>
+		  	</tbody>
+		  </table>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

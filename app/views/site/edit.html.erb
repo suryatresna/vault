@@ -1,0 +1,24 @@
+<% content_for :title do %>
+	Edit Site
+<% end %>
+
+<% content_for :titleTag do %>
+	The site of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-body">
+	      <h1>Site#edit</h1>
+		  <%= form_for @site, url: {action: "update"}, method: 'put' do |f| %>
+	      <%= render 'site/form', {f:f, permissions: @permissions} %>
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

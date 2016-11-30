@@ -1,0 +1,70 @@
+<div class="row">
+	<div class="col-md-8">
+	<fieldset>
+	  	<legend>User Information</legend>
+	  	<div class="form-group">
+	  		<%= f.label :firstname %>
+	  		<%= f.text_field :firstname, class:"form-control", placeholder:"User First name" %>
+	  	</div>
+	  	<div class="form-group">
+	  		<%= f.label :lastname %>
+	  		<%= f.text_field :lastname, class:"form-control", placeholder:"User Last name" %>
+	  	</div>
+	  	<div class="form-group">
+	  		<%= f.label :email %>
+	  		<%= f.text_field :email, class:"form-control", placeholder:"User email" %>
+	  	</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>Role</legend>
+		<div class="checkbox">
+			<% roles.each do |role| %>
+			<div class="checkbox">
+				<label>
+				  <input type="checkbox" class="js-switch" name="user[roles][]" value="<%= role.name %>" <%= ((@user.roles.include? role.name) ? 'checked' : nil) %>> <%= role.label %> 
+				</label>
+			</div>
+			<% end %>	
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Permission</legend>
+		<div class="checkbox">
+			<% permissions.each do |permission| %>
+			<div class="checkbox">
+				<label>
+				  <input type="checkbox" class="js-switch" name="user[permissions][]" value="<%= permission.name %>" <%= ((@user.permissions.include? permission.name) ? 'checked' : nil) %>> <%= permission.label %> 
+				</label>
+			</div>
+			<% end %>	
+		</div>
+	</fieldset>
+	</div>
+	<div class="col-md-4">
+		<fieldset>
+			<legend>Action</legend>
+			<div class="form-group">
+				<%= f.submit "Save", class: "btn btn-primary" %>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Sites</legend>
+			<% sites.each do |site| %>
+			<div class="checkbox">
+				<label>
+				  <input type="checkbox" class="js-switch" name="user[sites][]" value="<%= site.name %>" <%= ((@user.permissions.include? site.name) ? 'checked' : nil) %>> <%= site.label %> 
+				</label>
+			</div>
+			<% end %>
+		</fieldset>
+
+		<fieldset>
+			<legend>Profile</legend>
+			<div class="form-group">
+				
+			</div>
+		</fieldset>
+	</div>
+</div>

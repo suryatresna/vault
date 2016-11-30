@@ -1,0 +1,24 @@
+<% content_for :title do %>
+	Add User
+<% end %>
+
+<% content_for :titleTag do %>
+	The user of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-body">
+	      <h1>User#new</h1>
+	      <%= form_for @user, url: {action: "create"} do |f| %>
+	      <%= render 'user/form', {f:f, permissions: @permissions, roles: @roles, sites: @sites} %>
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

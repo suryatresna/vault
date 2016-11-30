@@ -1,0 +1,24 @@
+<% content_for :title do %>
+	Add Role
+<% end %>
+
+<% content_for :titleTag do %>
+	The role of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-body">
+	      <h1>Role#new</h1>
+	      <%= form_for @role, url: {action: "create"} do |f| %>
+	      <%= render 'role/form', {f:f} %>
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

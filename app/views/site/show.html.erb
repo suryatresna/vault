@@ -1,0 +1,60 @@
+<% content_for :title do %>
+	Edit Site
+<% end %>
+
+<% content_for :titleTag do %>
+	The site of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-body">
+	      <h1>Site#show [<%= @site.label %>]</h1>
+		  <div class="row">
+				<div class="col-md-8">
+				<fieldset>
+				  	<legend>Site Information</legend>
+				  	<div class="form-group">
+				  		<label for="name">Name</label>
+				  		<p class="form-control" disabled><%= @site.name %></p>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="label">Label</label>
+				  		<p class="form-control" disabled><%= @site.label %></p>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="domain">Domain</label>
+				  		<p class="form-control" disabled><%= @site.domain %></p>
+				  	</div>
+				</fieldset>
+				<fieldset>
+					<legend>Permissions Allow</legend>
+					<div class="form-group">
+						<% @permissions.each do |perm| %>
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" disabled name="site[permissions][]" value="<%= perm.name %>" <%= ((@site.permissions.include? perm.name) ? 'checked' : nil) %>> <%= perm.name %> 
+							</label>
+						</div>
+						<% end %>	
+				  	</div>
+				</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset>
+						<legend>Action</legend>
+						<div class="form-group">
+							<%= link_to "Edit", {controller: "site", action: "edit", id: @site.id}, class: "btn btn-primary" %>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+

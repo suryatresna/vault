@@ -1,0 +1,58 @@
+<% content_for :title do %>
+	User
+<% end %>
+
+<% content_for :titleTag do %>
+	The user of user permissions
+<% end %>
+
+<% content_for :body do %>
+
+<div class="row">
+	<div class="col-sm-12">
+	  <div class="panel panel-white no-radius">
+	    <div class="panel-heading border-light">
+			<h4 class="panel-title">Users</h4>
+			<ul class="panel-heading-tabs border-light">
+				<li>
+					<%= link_to "Add New", {controller: "user", action: "new"}, class: "btn btn-info" %>
+				</li>
+			</ul>
+		</div>
+	    <div class="panel-body">
+		  <table class="table table-bordered">
+		  	<thead>
+		  		<th width="5%">ID</th>
+		  		<th width="25%">Email</th>
+		  		<th width="20%">Name</th>
+		  		<th width="40%">Action</th>
+		  	</thead>
+		  	<tbody>
+		  	<% if @users.count > 0 %>
+		  	<% @users.each do |user| %>
+		  		<tr>
+		  			<td><input type="checkbox" name="user[]" value="<%= user.id %>"></td>
+		  			<td><%= user.email %></td>
+		  			<td><%= user.fullname %></td>
+		  			<td>
+		  				<div class="btn-group">
+		  					<%= link_to "View", {controller: "user", action: "show", id: user.id},class: "btn" %>
+		  					<%= link_to "Edit", {controller: "user", action: "edit", id: user.id},class: "btn" %>
+		  					<%= link_to "Delete", {controller: "user", action: "destroy", id: user.id}, method: :delete, data: {confirm: 'Are you sure ?'} ,class: "btn" %>
+		  				</div>
+		  			</td>
+		  		</tr>
+		  	<% end %>
+		  	<% else %>
+				<tr>
+					<td colspan="100%">No Records</td>
+				</tr>
+		  	<% end %>
+		  	</tbody>
+		  </table>
+	    </div>
+	  </div>
+	</div>
+</div>
+<% end %>
+
