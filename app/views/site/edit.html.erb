@@ -12,9 +12,9 @@
 	<div class="col-sm-12">
 	  <div class="panel panel-white no-radius">
 	    <div class="panel-body">
-	      <h1>Site#edit</h1>
+	      <h1>Site [<%= @site.label %>]</h1>
 		  <%= form_for @site, url: {action: "update"}, method: 'put' do |f| %>
-	      <%= render 'site/form', {f:f, permissions: @permissions} %>
+	      <%= render 'site/form', {f:f, permissions: @permissions, users: @users} %>
 	      <% end %>
 	    </div>
 	  </div>

@@ -7,29 +7,35 @@ module Vault
 
     def new
     	@site = Site.new
-      @permissions = Permission.all()
+      global_params
 
       render "site/new"
     end
 
     def create
-      # render plain: site_params.inspect
+      # render plain: params.inspect
     	@site = Site.new(site_params)
-
-    	@site.save
-    	redirect_to @site
+      global_params
+      if @site.save
+    	  redirect_to @site
+      else
+        render 'site/new'
+      end
+      # render plain: @site.inspect
+    	
     end
 
     def edit
     	@site = Site.find(params[:id])
-      @permissions = Permission.all()
-
+      global_params
+      @users = User.includes(:roles,:permissions,:sites).where(sites:@site.name)
+      # render plain: @users.inspect
       render "site/edit"
     end
 
     def show
     	@site = Site.find(params[:id])
-      @permissions = Permission.all()
+      global_params
       render "site/show"
     end
 
@@ -51,7 +57,11 @@ module Vault
 
     private
   	def site_params
-  		params.require(:site).permit(:name, :label, :domain, permissions:[])
+  		params.require(:site).permit(:name, :label, :domain, permission_ids:[])
   	end
+
+    def global_params
+      @permissions = Permission.all()
+    end
   end
 end

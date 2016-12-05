@@ -1,70 +1,113 @@
 <div class="row">
-	<div class="col-md-8">
-	<fieldset>
-	  	<legend>User Information</legend>
-	  	<div class="form-group">
-	  		<%= f.label :firstname %>
-	  		<%= f.text_field :firstname, class:"form-control", placeholder:"User First name" %>
-	  	</div>
-	  	<div class="form-group">
-	  		<%= f.label :lastname %>
-	  		<%= f.text_field :lastname, class:"form-control", placeholder:"User Last name" %>
-	  	</div>
-	  	<div class="form-group">
-	  		<%= f.label :email %>
-	  		<%= f.text_field :email, class:"form-control", placeholder:"User email" %>
-	  	</div>
-	</fieldset>
+	<div class="col-md-12">
+	<% if @user.errors.any? %>
+	    <div id="alert alert-warning">
+	      <strong>
+	        <%= pluralize(@user.errors.count, "error") %> prohibited
+	        this user from being saved:
+	      </strong>
+	      <ul>
+	        <% @user.errors.full_messages.each do |msg| %>
+	          <li><%= msg %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+		<div class="tabbable tabs-left">
+			<ul id="myTab4" class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab-general-info" data-toggle="tab"> General Information </a>
+				</li>
+				<li class="">
+					<a href="#tab-system" data-toggle="tab"> System </a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="tab-general-info">
+					<fieldset>
+					  	<legend>Basic Information</legend>
+					  	<div class="form-group">
+					  		<%= f.label :firstname %>
+					  		<%= f.text_field :firstname, class:"form-control", placeholder:"User First name" %>
+					  	</div>
+					  	<div class="form-group">
+					  		<%= f.label :lastname %>
+					  		<%= f.text_field :lastname, class:"form-control", placeholder:"User Last name" %>
+					  	</div>
+					  	<div class="form-group">
+					  		<%= f.label :email %>
+					  		<%= f.text_field :email, class:"form-control", placeholder:"User email" %>
+					  	</div>
+					</fieldset>
+					<fieldset>
+					  	<legend>Credential</legend>
+					  	<p class="text-info">Left blank if wont update your password.</p>
+					  	<% if current_user().hasRole('admin') %>
+				  		<div class="form-group">
+					  		<%= f.label :password %>
+					  		<%= f.password_field :password, class:"form-control", placeholder:"Insert new password user." %>
+					  	</div>
+					  	<div class="form-group">
+					  		<%= f.label :password_confirmation %>
+					  		<%= f.password_field :password_confirmation, class:"form-control", placeholder:"Insert new password user." %>
+					  	</div>
+					  	<% else %>
+					  	<div class="form-group">
+					  		<%= f.label :password_old %>
+					  		<%= f.password_field :password_old, class:"form-control", placeholder:"Insert old password user." %>
+					  	</div>
+						<div class="form-group">
+					  		<%= f.label :password %>
+					  		<%= f.password_field :password, class:"form-control", placeholder:"Insert new password user." %>
+					  	</div>
+					  	<div class="form-group">
+					  		<%= f.label :password_confirmation %>
+					  		<%= f.password_field :password_confirmation, class:"form-control", placeholder:"Insert new password user." %>
+					  	</div>
+					  	<% end %>
+					</fieldset>
+				</div>
+				<div class="tab-pane fade" id="tab-system">
+					<fieldset>
+						<legend>Role</legend>
+						<div class="checkbox">
+							<% roles.each do |role| %>
+							<div class="checkbox">
+								<label>
+								  <input type="checkbox" class="js-switch" name="user[role_ids][]" value="<%= role.id %>" <%= ((@user.roles.include? role) ? 'checked' : nil) %>> <%= role.label %> 
+								</label>
+							</div>
+							<% end %>	
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Sites</legend>
+						<% sites.each do |site| %>
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" class="js-switch" name="user[site_ids][]" value="<%= site.id %>" <%= ((@user.sites.include? site) ? 'checked' : nil) %>> <%= site.label %> 
+							</label>
+						</div>
+						<% end %>
+					</fieldset>
+					<fieldset>
+						<legend>Permission</legend>
+						<div class="checkbox">
+							<% permissions.each do |permission| %>
+							<div class="checkbox">
+								<label>
+								  <input type="checkbox" class="js-switch" name="user[permission_ids][]" value="<%= permission.id %>" <%= ((@user.permissions.include? permission) ? 'checked' : nil) %>> <%= permission.label %> 
+								</label>
+							</div>
+							<% end %>	
+						</div>
+					</fieldset>
+				</div>
 
-	<fieldset>
-		<legend>Role</legend>
-		<div class="checkbox">
-			<% roles.each do |role| %>
-			<div class="checkbox">
-				<label>
-				  <input type="checkbox" class="js-switch" name="user[roles][]" value="<%= role.name %>" <%= ((@user.roles.include? role.name) ? 'checked' : nil) %>> <%= role.label %> 
-				</label>
 			</div>
-			<% end %>	
 		</div>
-	</fieldset>
-	<fieldset>
-		<legend>Permission</legend>
-		<div class="checkbox">
-			<% permissions.each do |permission| %>
-			<div class="checkbox">
-				<label>
-				  <input type="checkbox" class="js-switch" name="user[permissions][]" value="<%= permission.name %>" <%= ((@user.permissions.include? permission.name) ? 'checked' : nil) %>> <%= permission.label %> 
-				</label>
-			</div>
-			<% end %>	
+		<div class="form-group">
+			<%= f.submit "Save", class: "btn btn-primary" %>
 		</div>
-	</fieldset>
-	</div>
-	<div class="col-md-4">
-		<fieldset>
-			<legend>Action</legend>
-			<div class="form-group">
-				<%= f.submit "Save", class: "btn btn-primary" %>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<legend>Sites</legend>
-			<% sites.each do |site| %>
-			<div class="checkbox">
-				<label>
-				  <input type="checkbox" class="js-switch" name="user[sites][]" value="<%= site.name %>" <%= ((@user.permissions.include? site.name) ? 'checked' : nil) %>> <%= site.label %> 
-				</label>
-			</div>
-			<% end %>
-		</fieldset>
-
-		<fieldset>
-			<legend>Profile</legend>
-			<div class="form-group">
-				
-			</div>
-		</fieldset>
 	</div>
 </div>

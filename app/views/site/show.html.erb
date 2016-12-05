@@ -36,7 +36,7 @@
 						<% @permissions.each do |perm| %>
 						<div class="checkbox">
 							<label>
-							  <input type="checkbox" disabled name="site[permissions][]" value="<%= perm.name %>" <%= ((@site.permissions.include? perm.name) ? 'checked' : nil) %>> <%= perm.name %> 
+							  <input type="checkbox" disabled name="site[permission_ids][]" value="<%= perm.id %>" <%= ((@site.permissions.include? perm) ? 'checked' : nil) %>> <%= perm.name %> 
 							</label>
 						</div>
 						<% end %>	

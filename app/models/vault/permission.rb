@@ -2,6 +2,8 @@ module Vault
 	class Permission
 	  include Mongoid::Document
 
+	  has_many :user
+
 	  store_in collection: "permissions"
 
 	  field :name, type: String, default: ""

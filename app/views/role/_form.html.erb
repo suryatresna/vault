@@ -1,16 +1,44 @@
 <div class="row">
+	<% if @role.errors.any? %>
+	    <div id="alert alert-warning">
+	      <strong>
+	        <%= pluralize(@role.errors.count, "error") %> prohibited
+	        this role from being saved:
+	      </strong>
+	      <ul>
+	        <% @role.errors.full_messages.each do |msg| %>
+	          <li><%= msg %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	<% end %>
 	<div class="col-md-8">
 		<fieldset>
-	  	<legend>Role Information</legend>
-	  	<div class="form-group">
-	  		<%= f.label :name %>
-	  		<%= f.text_field :name, class:"form-control", placeholder:"Role name" %>
-	  	</div>
-	  	<div class="form-group">
-	  		<%= f.label :label %>
-	  		<%= f.text_field :label, class:"form-control", placeholder:"Role label" %>
-	  	</div>
-	</fieldset>
+		  	<legend>Role Information</legend>
+		  	<div class="form-group">
+		  		<%= f.label :name %>
+		  		<%= f.text_field :name, class:"form-control", placeholder:"Role name" %>
+		  	</div>
+		  	<div class="form-group">
+		  		<%= f.label :label %>
+		  		<%= f.text_field :label, class:"form-control", placeholder:"Role label" %>
+		  	</div>
+		</fieldset>
+		<fieldset>
+			<legend>Permissions allowed</legend>
+			<% if @role.errors[:permission_ids].present? %>
+				<p class="text-warning"><%= @role.errors[:permission_ids][0] %></p>
+			<% end %>
+			<div class="form-group">
+				<% permissions.each do |perm| %>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox" class="js-switch" name="role[permission_ids][]" value="<%= perm.id %>" <%= ((@role.permissions.include? perm) ? 'checked' : nil) %>> <%= perm.name %> 
+					</label>
+				</div>
+				<% end %>	
+		  	</div>
+		</fieldset>
 	</div>
 	<div class="col-md-4">
 		<fieldset>

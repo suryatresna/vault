@@ -16,16 +16,28 @@
 		  <div class="row">
 				<div class="col-md-8">
 					<fieldset>
-				  	<legend>Role Information</legend>
-				  	<div class="form-group">
-				  		<label for="name">Name</label>
-				  		<p class="form-control" disabled><%= @role.name %></p>
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="label">Label</label>
-				  		<p class="form-control" disabled><%= @role.label %></p>
-				  	</div>
-				</fieldset>
+					  	<legend>Role Information</legend>
+					  	<div class="form-group">
+					  		<label for="name">Name</label>
+					  		<p class="form-control" disabled><%= @role.name %></p>
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="label">Label</label>
+					  		<p class="form-control" disabled><%= @role.label %></p>
+					  	</div>
+					</fieldset>
+					<fieldset>
+						<legend>Permissions allowed</legend>
+						<div class="form-group">
+							<% @permissions.each do |perm| %>
+							<div class="checkbox">
+								<label>
+								  <input type="checkbox" disabled class="js-switch" name="role[permission_ids][]" value="<%= perm.id %>" <%= ((@role.permissions.include? perm) ? 'checked' : nil) %>> <%= perm.name %> 
+								</label>
+							</div>
+							<% end %>	
+					  	</div>
+					</fieldset>
 				</div>
 				<div class="col-md-4">
 					<fieldset>

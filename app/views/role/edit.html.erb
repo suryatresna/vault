@@ -14,7 +14,7 @@
 	    <div class="panel-body">
 	      <h1>Role#edit</h1>
 		  <%= form_for @role, url: {action: "update"}, method: 'put' do |f| %>
-	      <%= render 'role/form', {f:f} %>
+	      <%= render 'role/form', {f:f, permissions: @permissions} %>
 	      <% end %>
 	    </div>
 	  </div>

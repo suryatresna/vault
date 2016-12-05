@@ -7,31 +7,37 @@ module Vault
 
     def new
     	@role = Role.new
+      global_params
       render "role/new"
     end
 
     def create
       # render plain: role_params.inspect
     	@role = Role.new(role_params)
-
-    	@role.save
-    	redirect_to @role
+      global_params
+    	if @role.save
+    	  redirect_to @role
+      else
+        render "role/new"
+      end
     end
 
     def edit
     	@role = Role.find(params[:id])
-
+      global_params
       render "role/edit"
     end
 
     def show
     	@role = Role.find(params[:id])
-
+      global_params
       render "role/show"
     end
 
     def update
+
     	@role = Role.find(params[:id])
+      global_params
     	if @role.update(role_params)
     		redirect_to(@role)
     	else
@@ -48,7 +54,10 @@ module Vault
 
     private
   	def role_params
-  		params.require(:role).permit(:name, :label)
+  		params.require(:role).permit(:name, :label, permission_ids:[])
   	end
+    def global_params
+      @permissions = Permission.all()
+    end
   end
 end
