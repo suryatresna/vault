@@ -46,7 +46,15 @@
 					  	</div>
 					</fieldset>
 					<fieldset>
-					  	<legend>Images</legend>
+						<legend>Analytics</legend>
+						<div class="form-group <%= (@site.errors[:ga_code].present?) ? "has-error" : nil  %>">
+							<%= f.label :ga_code, 'Google Analytic Code' %>
+							<%= f.text_field :ga_code, class:"form-control", placeholder:"Insert GA code site" %>
+							<%= ((@site.errors[:ga_code].present?) ? @site.errors[:ga_code][0] : nil) %>
+						</div>
+					</fieldset>
+					<fieldset>
+					  	<legend>Media</legend>
 					  	
 					</fieldset>
 				</div>
@@ -76,8 +84,8 @@
 							<th width="30%">Action</th>
 						</thead>
 						<tbody>
-						<% if users.present? && users.count > 0 %>
-							<% users.each do |member| %>
+						<% if  @users.count > 0 %>
+							<% @users.each do |member| %>
 								<tr>
 									<td>
 										<div class="checkbox clip-check check-primary checkbox-inline">
