@@ -55,7 +55,10 @@
 					</fieldset>
 					<fieldset>
 					  	<legend>Media</legend>
-					  	
+					  	<div class="form-group">
+					  		<%= f.label :favicon, 'Favicon' %>
+					  		<%= f.file_field :favicon %>
+					  	</div>
 					</fieldset>
 				</div>
 				<div class="tab-pane fade" id="tab-system">

@@ -2,6 +2,8 @@ module Vault
 	class Site
 	  include Mongoid::Document
 
+	  # Sync File
+	  # mount_uploader :favicon, Flysys::Uploader::S3
 	  # has_and_belongs_to_many :users, class_name: "User"
 	  has_and_belongs_to_many :permissions, class_name: "Vault::Permission"
 
@@ -15,7 +17,7 @@ module Vault
 	  field :active, type: Boolean, default: false
 
 	  # set icons site [favicon, icon, footer_icon, side_icon]
-	  field :icons, type: Array, default: []
+	  field :favicon, type: String, default: ""
 	  field :howto, type: Array, default: []
 
 	  field :permission_ids, type: Array, default: []

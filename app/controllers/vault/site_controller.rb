@@ -55,6 +55,10 @@ module Vault
     	redirect_to 'site'
     end 
 
+    def upload
+      
+    end
+
     private
   	def site_params
   		params.require(:site).permit(:name, :label, :domain, :ga_code,permission_ids:[])
