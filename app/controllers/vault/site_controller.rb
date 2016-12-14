@@ -36,6 +36,7 @@ module Vault
     def show
     	@site = Site.find(params[:id])
       global_params
+      @users = @site.users
       render "site/show"
     end
 
@@ -61,7 +62,7 @@ module Vault
 
     private
   	def site_params
-  		params.require(:site).permit(:name, :label, :domain, :ga_code,permission_ids:[])
+  		params.require(:site).permit(:name, :label, :domain, :ga_code, :ga_view_id,permission_ids:[])
   	end
 
     def global_params

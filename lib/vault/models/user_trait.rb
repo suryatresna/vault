@@ -17,6 +17,10 @@ module Vault
 			  field :active,        type: Boolean, default: false
 			  field :profile_img,   type: String, default: ""
 
+
+
+	  		  field :current_site, type: BSON::ObjectId
+
 			  # Scopes
 			  scope :actived, -> { where(active: true) }
 

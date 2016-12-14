@@ -24,6 +24,7 @@ module Vault
 
 	  # Google Analytic Code
 	  field :ga_code, type: String, default: ""
+	  field :ga_view_id, type: String, default: ""
 
 
 	  validates :name, presence: {message: 'The name site is required.'}, uniqueness: true

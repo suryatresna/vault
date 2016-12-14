@@ -52,6 +52,11 @@
 							<%= f.text_field :ga_code, class:"form-control", placeholder:"Insert GA code site" %>
 							<%= ((@site.errors[:ga_code].present?) ? @site.errors[:ga_code][0] : nil) %>
 						</div>
+						<div class="form-group <%= (@site.errors[:ga_view_id].present?) ? "has-error" : nil  %>">
+							<%= f.label :ga_view_id, 'Google Analytic View ID Code' %>
+							<%= f.text_field :ga_view_id, class:"form-control", placeholder:"Insert GA View ID code site" %>
+							<%= ((@site.errors[:ga_view_id].present?) ? @site.errors[:ga_view_id][0] : nil) %>
+						</div>
 					</fieldset>
 					<fieldset>
 					  	<legend>Media</legend>

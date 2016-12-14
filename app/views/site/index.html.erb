@@ -38,6 +38,7 @@
 		  			<td><%= site.users.count %></td>
 		  			<td>
 		  				<div class="btn-group">
+		  					<%= link_to "View", {controller: "site", action: "show", id: site.id},class: "btn" %>
 		  					<%= link_to "Edit", {controller: "site", action: "edit", id: site.id},class: "btn" %>
 		  					<%= link_to "Delete", {controller: "site", action: "destroy", id: site.id}, method: :delete, data: {confirm: 'Are you sure ?'} ,class: "btn" %>
 		  				</div>

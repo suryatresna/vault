@@ -20,6 +20,7 @@ module Vault
       # render plain: user_params.inspect
     	@user = User.new(user_params)
       global_perm
+      @user.current_site = params[:user][:site_ids][0]
       if @user.save
     	  redirect_to @user
       else
@@ -42,7 +43,6 @@ module Vault
       # render plain: params[:user][:password_confirmation].inspect
     	@user = User.find(params[:id])
       global_perm
-
     	if @user.update(user_params)
         if params[:user][:password_confirmation].present?
           if @user.update(user_pass_params)
