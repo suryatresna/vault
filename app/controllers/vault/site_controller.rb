@@ -67,6 +67,7 @@ module Vault
 
     def global_params
       @permissions = Permission.all()
+      @users = User.all()
     end
   end
 end
