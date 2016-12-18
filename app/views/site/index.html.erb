@@ -25,6 +25,7 @@
 		  		<th width="5%">ID</th>
 		  		<th width="25%">Name</th>
 		  		<th width="20%">Label</th>
+		  		<th width="10%">Members</th>
 		  		<th width="40%">Action</th>
 		  	</thead>
 		  	<tbody>
@@ -34,8 +35,10 @@
 		  			<td><input type="checkbox" name="site[]" value="<%= site.id %>"></td>
 		  			<td><%= site.name %> <br> <%= site.domain %></td>
 		  			<td><%= site.label %></td>
+		  			<td><%= site.users.count %></td>
 		  			<td>
 		  				<div class="btn-group">
+		  					<%= link_to "View", {controller: "site", action: "show", id: site.id},class: "btn" %>
 		  					<%= link_to "Edit", {controller: "site", action: "edit", id: site.id},class: "btn" %>
 		  					<%= link_to "Delete", {controller: "site", action: "destroy", id: site.id}, method: :delete, data: {confirm: 'Are you sure ?'} ,class: "btn" %>
 		  				</div>

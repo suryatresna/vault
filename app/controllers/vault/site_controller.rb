@@ -28,7 +28,7 @@ module Vault
     def edit
     	@site = Site.find(params[:id])
       global_params
-      @users = User.includes(:roles,:permissions,:sites).where(sites:@site.name)
+      @users = @site.users
       # render plain: @users.inspect
       render "site/edit"
     end
@@ -36,6 +36,7 @@ module Vault
     def show
     	@site = Site.find(params[:id])
       global_params
+      @users = @site.users
       render "site/show"
     end
 
@@ -55,13 +56,18 @@ module Vault
     	redirect_to 'site'
     end 
 
+    def upload
+      
+    end
+
     private
   	def site_params
-  		params.require(:site).permit(:name, :label, :domain, permission_ids:[])
+  		params.require(:site).permit(:name, :label, :domain, :ga_code, :ga_view_id,permission_ids:[])
   	end
 
     def global_params
       @permissions = Permission.all()
+      @users = User.all()
     end
   end
 end

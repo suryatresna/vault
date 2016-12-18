@@ -21,6 +21,9 @@
 				<li class="">
 					<a href="#tab-system" data-toggle="tab"> System </a>
 				</li>
+				<li class="">
+					<a href="#tab-accessing" data-toggle="tab">Accessing</a>
+				</li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="tab-general-info">
@@ -102,6 +105,21 @@
 							<% end %>	
 						</div>
 					</fieldset>
+				</div>
+				<div class="tab-pane fade" id="tab-accessing">
+					<% if @user.current_site.present? %>
+					<fieldset>
+						<legend>Default Access</legend>
+						<div class="form-group">
+							<%= f.label :current_site %>
+							<%= f.select(:current_site, class: "form-control") do %>
+								<% @user.sites.each do |site| %>
+									<%= content_tag(:option, site.name, value: site.id) %>
+								<% end %> 
+							<% end %>
+						</div>
+					</fieldset>
+					<% end %>
 				</div>
 
 			</div>

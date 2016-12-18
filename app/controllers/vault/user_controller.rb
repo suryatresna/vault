@@ -1,9 +1,13 @@
 module Vault
   class UserController < ApplicationController
+    include ReactOnRails::Controller
+    before_action :set_users
 
     def index
-    	@users = User.all()
-      render "user/index"
+    	# @users = User.all()
+      # render "user/index"
+      redux_store("routerUsersStore", props: users_json_string)
+      render_content
     end
 
     def new
@@ -16,6 +20,7 @@ module Vault
       # render plain: user_params.inspect
     	@user = User.new(user_params)
       global_perm
+      @user.current_site = params[:user][:site_ids][0]
       if @user.save
     	  redirect_to @user
       else
@@ -38,7 +43,6 @@ module Vault
       # render plain: params[:user][:password_confirmation].inspect
     	@user = User.find(params[:id])
       global_perm
-
     	if @user.update(user_params)
         if params[:user][:password_confirmation].present?
           if @user.update(user_pass_params)
@@ -62,6 +66,7 @@ module Vault
     end 
 
     private
+
   	def user_params
   		params.require(:user).permit(:email,:active,:firstname, :lastname, permission_ids:[], role_ids:[], site_ids:[])
   	end
@@ -74,6 +79,22 @@ module Vault
       @permissions = Permission.all()
       @sites = Site.all()
       @roles = Role.all()
+    end
+
+    def set_users
+      @users = User.order('email ASC')
+    end
+
+    def users_json_string
+      render_to_string(template: "/user/index.json.jbuilder",
+                      locals: { users: User.all }, format: :json)
+    end
+
+    def render_content
+      respond_to do |format|
+        format.html { render 'user/index' }
+        format.json { render 'user/index' }
+      end
     end
 
   end
