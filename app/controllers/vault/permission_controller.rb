@@ -1,5 +1,8 @@
 module Vault
   class PermissionController < ApplicationController
+
+    layout "admin/layouts/default"
+
     def index
     	@permissions = Permission.all()
       render "permission/index"

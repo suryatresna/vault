@@ -1,5 +1,8 @@
 module Vault
   class RoleController < ApplicationController
+
+    layout "admin/layouts/default"
+
     def index
     	@roles = Role.all()
       render "role/index"

@@ -1,7 +1,8 @@
 module Vault
   class UserController < ApplicationController
-    include ReactOnRails::Controller
     before_action :set_users
+
+    layout "admin/layouts/default"
 
     def index
     	# @users = User.all()

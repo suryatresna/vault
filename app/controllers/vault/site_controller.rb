@@ -1,5 +1,8 @@
 module Vault
   class SiteController < ApplicationController
+
+    layout "admin/layouts/default"
+
     def index
     	@sites = Site.all()
       render "site/index"
