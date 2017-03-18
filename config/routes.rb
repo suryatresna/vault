@@ -1,8 +1,8 @@
 Vault::Engine.routes.draw do
-	resources :role
-	resources :permission
-	resources :site
-	resources :user
+	# resources :role
+	# resources :permission
+	# resources :site
+	# resources :user
 
 	# get '/profile', to: 'profile#show'
 
